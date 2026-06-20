@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DRIFT KING - Neon Physics Racer</title>
+    <!-- Google Fonts: Orbitron for HUD/Cyberpunk feel, Outfit for clean UI -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Local styles -->
+    
+    <!-- Load Ammo.js WebAssembly build -->
+    <script src="./ammo/ammo.wasm.js"></script>
+    <script type="module" crossorigin src="./assets/index-CqWESRqb.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CAmwhBCS.css">
+  </head>
+  <body>
+    <!-- Game Canvas -->
+    <div id="canvas-container"></div>
+
+    <!-- Main UI Overlay -->
+    <div id="ui-overlay" class="menu-state">
+      
+      <!-- MAIN MENU -->
+      <div id="main-menu" class="ui-screen active">
+        <div class="logo-container animate-glow">
+          <h1 class="game-title">DRIFT <span class="accent-text">KING</span></h1>
+          <p class="tagline">NEON PHYSICS DRIFT RACER</p>
+        </div>
+
+        <div class="menu-actions">
+          <button id="btn-play" class="btn primary-btn pulse-glow">
+            <span class="btn-text">PLAY MATCH</span>
+            <span class="btn-glow"></span>
+          </button>
+          <button id="btn-garage" class="btn secondary-btn">
+            <i class="fa-solid fa-car"></i> GARAGE
+          </button>
+          <button id="btn-tracks" class="btn secondary-btn">
+            <i class="fa-solid fa-road"></i> SELECT TRACK
+          </button>
+          <button id="btn-controls" class="btn secondary-btn">
+            <i class="fa-solid fa-gamepad"></i> CONTROLS
+          </button>
+        </div>
+
+        <div class="credits">
+          Powered by Three.js & Ammo.js Physics Engine
+        </div>
+      </div>
+
+      <!-- TRACK SELECTOR -->
+      <div id="track-menu" class="ui-screen">
+        <div class="screen-header">
+          <button id="btn-back-tracks" class="btn-back"><i class="fa-solid fa-arrow-left"></i> BACK</button>
+          <h2>SELECT <span class="accent-text">TRACK</span></h2>
+        </div>
+        <div class="cards-grid">
+          <div class="card track-card active" data-track="neon-city">
+            <div class="track-thumbnail city-thumb"></div>
+            <div class="track-info">
+              <h3>NEON CITY</h3>
+              <p>Rainy cyberpunk streets with tight corners. Perfect for drifting.</p>
+              <div class="track-meta">
+                <span>Difficulty: <span class="diff-text hard">HARD</span></span>
+                <span>Laps: 3</span>
+              </div>
+            </div>
+          </div>
+          <div class="card track-card" data-track="sunset-canyon">
+            <div class="track-thumbnail canyon-thumb"></div>
+            <div class="track-info">
+              <h3>SUNSET CANYON</h3>
+              <p>Wide winding canyon roads at golden hour. Easy, flowing drifts.</p>
+              <div class="track-meta">
+                <span>Difficulty: <span class="diff-text easy">EASY</span></span>
+                <span>Laps: 2</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GARAGE (CAR CUSTOMIZER) -->
+      <div id="garage-menu" class="ui-screen">
+        <div class="screen-header">
+          <button id="btn-back-garage" class="btn-back"><i class="fa-solid fa-arrow-left"></i> BACK</button>
+          <h2>THE <span class="accent-text">GARAGE</span></h2>
+          <button id="btn-garage-toggle-ui" class="btn-back"><i class="fa-solid fa-eye-slash"></i> HIDE UI</button>
+        </div>
+        
+        <div class="garage-container">
+          <div class="garage-customizer">
+            <div class="customizer-section">
+              <h3>CAR COLOR</h3>
+              <div class="color-options">
+                <div class="color-dot active" data-color="#ff0055" style="background-color: #ff0055;"></div>
+                <div class="color-dot" data-color="#00ffcc" style="background-color: #00ffcc;"></div>
+                <div class="color-dot" data-color="#ffcc00" style="background-color: #ffcc00;"></div>
+                <div class="color-dot" data-color="#9900ff" style="background-color: #9900ff;"></div>
+                <div class="color-dot" data-color="#ffffff" style="background-color: #ffffff;"></div>
+                <div class="color-dot" data-color="#222222" style="background-color: #222222;"></div>
+              </div>
+            </div>
+
+            <div class="customizer-section">
+              <h3>NEON UNDERGLOW</h3>
+              <div class="glow-options">
+                <div class="glow-dot active" data-glow="#00ffcc" style="background-color: #00ffcc; box-shadow: 0 0 10px #00ffcc;"></div>
+                <div class="glow-dot" data-glow="#ff0055" style="background-color: #ff0055; box-shadow: 0 0 10px #ff0055;"></div>
+                <div class="glow-dot" data-glow="#0066ff" style="background-color: #0066ff; box-shadow: 0 0 10px #0066ff;"></div>
+                <div class="glow-dot" data-glow="#ff9900" style="background-color: #ff9900; box-shadow: 0 0 10px #ff9900;"></div>
+                <div class="glow-dot" data-glow="none" style="background-color: transparent; border: 2px dashed #555;">None</div>
+              </div>
+            </div>
+
+            <div class="customizer-section">
+              <h3>WHEEL TYPE</h3>
+              <div class="wheel-options">
+                <button class="wheel-btn active" data-wheels="sport">SPORT RIMS</button>
+                <button class="wheel-btn" data-wheels="classic">CLASSIC SPOKE</button>
+                <button class="wheel-btn" data-wheels="cyber">CYBER DISK</button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="garage-stats">
+            <h3>PERFORMANCE PROFILE</h3>
+            <div class="stat-bar-group">
+              <label>SPEED</label>
+              <div class="bar-container"><div class="bar-fill" style="width: 85%;"></div></div>
+            </div>
+            <div class="stat-bar-group">
+              <label>ACCEL</label>
+              <div class="bar-container"><div class="bar-fill" style="width: 75%;"></div></div>
+            </div>
+            <div class="stat-bar-group">
+              <label>DRIFT ANGLE</label>
+              <div class="bar-container"><div class="bar-fill" style="width: 95%;"></div></div>
+            </div>
+            <div class="stat-bar-group">
+              <label>TRACTION</label>
+              <div class="bar-container"><div class="bar-fill" style="width: 40%;"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTROLS / SETTINGS -->
+      <div id="controls-menu" class="ui-screen">
+        <div class="screen-header">
+          <button id="btn-back-controls" class="btn-back"><i class="fa-solid fa-arrow-left"></i> BACK</button>
+          <h2>DRIVE <span class="accent-text">CONTROLS</span></h2>
+        </div>
+        <div class="controls-guide">
+          <div class="control-row">
+            <span class="control-key">W</span> or <span class="control-key"><i class="fa-solid fa-arrow-up"></i></span>
+            <span class="control-desc">Accelerate</span>
+          </div>
+          <div class="control-row">
+            <span class="control-key">S</span> or <span class="control-key"><i class="fa-solid fa-arrow-down"></i></span>
+            <span class="control-desc">Brake / Reverse</span>
+          </div>
+          <div class="control-row">
+            <span class="control-key">A</span> / <span class="control-key">D</span> or <span class="control-key"><i class="fa-solid fa-arrow-left"></i></span> / <span class="control-key"><i class="fa-solid fa-arrow-right"></i></span>
+            <span class="control-desc">Steering</span>
+          </div>
+          <div class="control-row">
+            <span class="control-key long-key">SPACEBAR</span>
+            <span class="control-desc">Handbrake (Drift Trigger)</span>
+          </div>
+          <div class="control-row">
+            <span class="control-key long-key">L-SHIFT</span>
+            <span class="control-desc">Nitro Boost (Charge by Drifting!)</span>
+          </div>
+          <div class="control-row">
+            <span class="control-key">R</span>
+            <span class="control-desc">Reset Car Position</span>
+          </div>
+          <div class="control-row">
+            <span class="control-key">V</span>
+            <span class="control-desc">Change Camera View</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- HUD (IN GAME) -->
+      <div id="hud" class="ui-screen">
+        <!-- Top Stats -->
+        <div class="hud-top">
+          <div class="hud-box timer-box">
+            <div class="hud-label">TIME</div>
+            <div id="hud-time" class="hud-value">00:00.00</div>
+          </div>
+          
+          <div class="drift-score-container">
+            <div id="drift-multiplier" class="multiplier-tag">x1</div>
+            <div id="drift-points" class="drift-points-curr">+0</div>
+            <div id="drift-points-total" class="drift-points-total">SCORE: 0</div>
+          </div>
+
+          <div class="hud-box lap-box">
+            <div class="hud-label">LAP</div>
+            <div id="hud-lap" class="hud-value">1 / 3</div>
+          </div>
+        </div>
+
+        <!-- Drift Message Banner (floating messages) -->
+        <div id="drift-notification" class="drift-alert"></div>
+
+        <!-- Bottom Controls & Gauge -->
+        <div class="hud-bottom">
+          <!-- Sound and Reset actions -->
+          <div class="hud-actions-left">
+            <button id="btn-hud-audio" class="hud-action-btn" title="Toggle Sound">
+              <i class="fa-solid fa-volume-high"></i>
+            </button>
+            <button id="btn-hud-reset" class="hud-action-btn" title="Reset Vehicle (R)">
+              <i class="fa-solid fa-rotate-right"></i>
+            </button>
+            <button id="btn-hud-exit" class="hud-action-btn exit-btn" title="Return to Menu">
+              <i class="fa-solid fa-door-open"></i> Exit
+            </button>
+          </div>
+
+          <!-- Speedometer circular gauge -->
+          <div class="speedometer-container">
+            <svg class="speed-ring" width="160" height="160">
+              <circle class="speed-ring-bg" cx="80" cy="80" r="70" />
+              <circle id="speed-ring-fill" class="speed-ring-fill" cx="80" cy="80" r="70" stroke-dasharray="440" stroke-dashoffset="440" />
+            </svg>
+            <div class="speed-digital">
+              <span id="speed-val">0</span>
+              <span class="speed-unit">KM/H</span>
+            </div>
+            <div class="speed-rpm">
+              <div id="rpm-needle" class="rpm-needle"></div>
+              <span class="rpm-label">RPM</span>
+            </div>
+          </div>
+
+          <!-- Nitro Boost indicator -->
+          <div class="nitro-container">
+            <div class="hud-label">NITRO BOOST</div>
+            <div class="nitro-bar">
+              <div id="nitro-fill" class="nitro-fill" style="width: 0%;"></div>
+              <div class="nitro-particles"></div>
+            </div>
+            <span class="nitro-instruction">PRESS SHIFT</span>
+          </div>
+        </div>
+
+        <!-- Physics Tuning Panel -->
+        <div id="hud-tuning-panel" class="hud-tuning-panel collapsed">
+          <button id="btn-toggle-tuning" class="btn-toggle-tuning" title="Toggle Physics Tuning Panel">
+            <i class="fa-solid fa-sliders"></i> TUNING
+          </button>
+          <div class="tuning-content">
+            <h3>PHYSICS TUNING</h3>
+            
+            <div class="tuning-group">
+              <div class="tuning-header">
+                <label>Engine Force</label>
+                <span id="val-engine-force">5800</span>
+              </div>
+              <input type="range" id="slide-engine-force" min="1000" max="7500" step="100" value="5800">
+            </div>
+
+            <div class="tuning-group">
+              <div class="tuning-header">
+                <label>Top Speed (KM/H)</label>
+                <span id="val-top-speed">240</span>
+              </div>
+              <input type="range" id="slide-top-speed" min="100" max="320" step="10" value="240">
+            </div>
+
+            <div class="tuning-group">
+              <div class="tuning-header">
+                <label>Rear Drift Grip</label>
+                <span id="val-drift-friction">0.9</span>
+              </div>
+              <input type="range" id="slide-drift-friction" min="0.1" max="3.0" step="0.1" value="0.9">
+            </div>
+
+            <div class="tuning-group">
+              <div class="tuning-header">
+                <label>Drift Yaw Damping</label>
+                <span id="val-drift-damping">0.75</span>
+              </div>
+              <input type="range" id="slide-drift-damping" min="0.05" max="3.0" step="0.05" value="0.75">
+            </div>
+
+            <div class="tuning-group">
+              <div class="tuning-header">
+                <label>Steering Sensitivity</label>
+                <span id="val-steering-speed">2.8</span>
+              </div>
+              <input type="range" id="slide-steering-speed" min="1.0" max="5.0" step="0.1" value="2.8">
+            </div>
+            
+            <button id="btn-reset-tuning" class="btn secondary-btn reset-tuning-btn">RESET DEFAULTS</button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- END GAME OVERLAY -->
+      <div id="game-over-screen" class="ui-screen">
+        <div class="logo-container animate-glow">
+          <h1 class="victory-title">FINISH!</h1>
+          <p class="tagline">CONGRATULATIONS DRIFT KING</p>
+        </div>
+        
+        <div class="results-container">
+          <div class="result-row">
+            <span>TRACK:</span>
+            <span id="res-track-name" class="result-value">NEON CITY</span>
+          </div>
+          <div class="result-row">
+            <span>TOTAL TIME:</span>
+            <span id="res-total-time" class="result-value">01:45.32</span>
+          </div>
+          <div class="result-row">
+            <span>DRIFT SCORE:</span>
+            <span id="res-drift-score" class="result-value">48,920</span>
+          </div>
+          <div class="result-row">
+            <span>RANK:</span>
+            <span id="res-rank" class="result-value rank-gold">S RANK</span>
+          </div>
+        </div>
+
+        <div class="menu-actions">
+          <button id="btn-restart" class="btn primary-btn">
+            <span class="btn-text">RETRY</span>
+          </button>
+          <button id="btn-return-menu" class="btn secondary-btn">
+            <i class="fa-solid fa-house"></i> MAIN MENU
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main JS Application script -->
+  </body>
+</html>
+
