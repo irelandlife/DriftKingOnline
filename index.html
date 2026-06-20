@@ -15,8 +15,8 @@
     
     <!-- Load Ammo.js WebAssembly build -->
     <script src="./ammo/ammo.wasm.js"></script>
-    <script type="module" crossorigin src="./assets/index-CqWESRqb.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-CAmwhBCS.css">
+    <script type="module" crossorigin src="./assets/index-BlR3Gm2S.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-Bvp3MF4v.css">
   </head>
   <body>
     <!-- Game Canvas -->
@@ -339,6 +339,46 @@
           </button>
           <button id="btn-return-menu" class="btn secondary-btn">
             <i class="fa-solid fa-house"></i> MAIN MENU
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Touch Controls Overlay -->
+    <div id="mobile-controls-container">
+      <div class="touch-left-zone">
+        <button id="btn-touch-left" class="touch-btn steering-btn">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button id="btn-touch-right" class="touch-btn steering-btn">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+      
+      <div class="touch-top-zone">
+        <button id="btn-touch-reset" class="touch-btn utility-btn" title="Reset Car">
+          <i class="fa-solid fa-rotate-right"></i>
+        </button>
+        <button id="btn-touch-cam" class="touch-btn utility-btn" title="Change View">
+          <i class="fa-solid fa-camera"></i>
+        </button>
+      </div>
+
+      <div class="touch-right-zone">
+        <div class="pedal-group">
+          <button id="btn-touch-brake" class="touch-btn brake-pedal">
+            <span>BRAKE</span>
+          </button>
+          <button id="btn-touch-gas" class="touch-btn gas-pedal">
+            <span>GAS</span>
+          </button>
+        </div>
+        <div class="boost-group">
+          <button id="btn-touch-handbrake" class="touch-btn handbrake-btn">
+            <span>DRIFT</span>
+          </button>
+          <button id="btn-touch-nitro" class="touch-btn nitro-btn">
+            <i class="fa-solid fa-bolt"></i>
           </button>
         </div>
       </div>
