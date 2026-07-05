@@ -15,8 +15,8 @@
     
     <!-- Load Ammo.js WebAssembly build -->
     <script src="./ammo/ammo.wasm.js"></script>
-    <script type="module" crossorigin src="./assets/index-DA6GdRaz.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-BZtgSswU.css">
+    <script type="module" crossorigin src="./assets/index-BqcsQEoN.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BxbzqK2i.css">
   </head>
   <body>
     <!-- Game Canvas -->
@@ -82,6 +82,63 @@
               </div>
             </div>
           </div>
+          <div class="card track-card" data-track="tokyo-docks">
+            <div class="track-thumbnail docks-thumb" style="background: linear-gradient(45deg, #0a1128, #114499);"></div>
+            <div class="track-info">
+              <h3>TOKYO DOCKS</h3>
+              <p>Industrial shipping yard with flat layouts and tight 90-degree corners.</p>
+              <div class="track-meta">
+                <span>Difficulty: <span class="diff-text medium" style="color: #ff9900; font-weight: bold;">MEDIUM</span></span>
+                <span>Laps: 3</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card track-card" data-track="snow-mountain">
+            <div class="track-thumbnail snow-thumb" style="background: linear-gradient(45deg, #dceeff, #ffffff);"></div>
+            <div class="track-info">
+              <h3>SNOW MOUNTAIN</h3>
+              <p>A blindingly bright, icy pass filled with sweeping curves and hairpins.</p>
+              <div class="track-meta">
+                <span>Difficulty: <span class="diff-text expert" style="color: #ff0055; font-weight: bold;">EXPERT</span></span>
+                <span>Laps: 2</span>
+              </div>
+            </div>
+          </div>
+          <div class="card track-card" data-track="space-park">
+            <div class="track-thumbnail space-thumb" style="background: linear-gradient(45deg, #090022, #3a0088);"></div>
+            <div class="track-info">
+              <h3>SPACE PARK</h3>
+              <p>A zero-gravity themed neon track suspended in deep space among glowing planets.</p>
+              <div class="track-meta">
+                <span>Difficulty: <span class="diff-text hard" style="color: #ff00cc; font-weight: bold;">HARD</span></span>
+                <span>Laps: 3</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card track-card" data-track="moon-park">
+            <div class="track-thumbnail moon-thumb" style="background: radial-gradient(circle, #cccccc, #444444);"></div>
+            <div class="track-info">
+              <h3>MOON PARK</h3>
+              <p>Drift on the stark, dusty lunar surface with endless craters and high-contrast sunlight.</p>
+              <div class="track-meta">
+                <span>Difficulty: <span class="diff-text medium" style="color: #ffffff; font-weight: bold;">MEDIUM</span></span>
+                <span>Laps: 2</span>
+              </div>
+            </div>
+          </div>
+          <div class="card track-card" data-track="tron-grid">
+            <div class="track-thumbnail tron-thumb" style="background: linear-gradient(45deg, #020205, #00ffff); border: 2px solid #00ffff; box-shadow: inset 0 0 10px #00ffff;"></div>
+            <div class="track-info">
+              <h3>TRON GRID</h3>
+              <p>Survival drift mode! Multiple AI drifters generate solid light trails. If you hit a trail, you are instantly deresolved.</p>
+              <div class="track-meta">
+                <span>Difficulty: <span class="diff-text expert" style="color: #ff0055; font-weight: bold;">SURVIVAL</span></span>
+                <span>Laps: 3</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -124,6 +181,42 @@
                 <button class="wheel-btn active" data-wheels="sport">SPORT RIMS</button>
                 <button class="wheel-btn" data-wheels="classic">CLASSIC SPOKE</button>
                 <button class="wheel-btn" data-wheels="cyber">CYBER DISK</button>
+              </div>
+            </div>
+            <div class="customizer-section">
+              <h3>BODY KIT</h3>
+              <div class="wheel-options">
+                <button class="kit-btn active" data-kit="stock">STOCK</button>
+                <button class="kit-btn" data-kit="street">STREET</button>
+                <button class="kit-btn" data-kit="aero">AERO WING</button>
+              </div>
+            </div>
+
+            <div class="customizer-section">
+              <h3>RIDE HEIGHT</h3>
+              <div class="slider-container" style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+                <input type="range" id="garage-ride-height" min="0" max="100" value="0" style="flex: 1; accent-color: var(--accent-cyan);">
+                <span id="val-garage-ride-height" style="font-family: 'Orbitron', sans-serif; font-weight: bold; width: 45px; text-align: right; color: var(--accent-cyan);">0%</span>
+              </div>
+            </div>
+
+            <div class="customizer-section">
+              <h3>CRUISE CONTROL</h3>
+              <div class="wheel-options" style="margin-bottom: 10px;">
+                <button class="cruise-btn active" data-cruise="off">OFF</button>
+                <button class="cruise-btn" data-cruise="on">ON</button>
+              </div>
+              <div class="slider-container" style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+                <input type="range" id="garage-cruise-speed" min="40" max="220" value="120" style="flex: 1; accent-color: var(--accent-cyan);">
+                <span id="val-garage-cruise-speed" style="font-family: 'Orbitron', sans-serif; font-weight: bold; width: 85px; text-align: right; color: var(--accent-cyan);">120 KM/H</span>
+              </div>
+            </div>
+            
+            <div class="customizer-section">
+              <h3>TRACK SLICKNESS</h3>
+              <div class="slider-container" style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+                <input type="range" id="garage-track-slickness" min="0" max="100" value="100" style="flex: 1; accent-color: var(--accent-cyan);">
+                <span id="val-garage-track-slickness" style="font-family: 'Orbitron', sans-serif; font-weight: bold; width: 45px; text-align: right; color: var(--accent-cyan);">100%</span>
               </div>
             </div>
           </div>
